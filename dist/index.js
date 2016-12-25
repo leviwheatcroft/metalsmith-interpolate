@@ -39,17 +39,19 @@ function interpolate(format, src, files, ...additional) {
   return format.replace(/\{([^}]+)\}/g, (match, token) => {
     let slugify = false;
     let result;
+    let resolved;
     // check for slugify marker
     if (/^[-_]/.test(token)) {
       slugify = token.slice(0, 1);
       token = token.slice(1);
     }
 
-    (0, _lodash.some)(resolvers, r => {
+    resolved = (0, _lodash.some)(resolvers, r => {
       result = r(token, meta);
-      return result;
+      // an 0 length string should return true
+      return (0, _lodash.isString)(result) || result;
     });
-    if (!result) throw new Error(`bad token: ${ token }`);
+    if (!resolved) throw new Error(`bad token: ${ token }`);
     if (slugify) result = (0, _slug2.default)(result, slugify);
     return result;
   });
