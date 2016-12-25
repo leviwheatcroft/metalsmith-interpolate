@@ -1,0 +1,6 @@
+*.log
+npm-debug.log*
+node_modules
+test/fixtures/build
+.nyc_output
+coverage
