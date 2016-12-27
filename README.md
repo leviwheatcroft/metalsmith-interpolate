@@ -14,6 +14,27 @@
 
 [fancy annotated code](https://leviwheatcroft.github.io/metalsmith-interpolate/lib/index.js.html)
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [metalsmith-interpolate](#pkgname)
+	- [install](#install)
+	- [usage](#usage)
+	- [tokens](#tokens)
+		- [from path](#from-path)
+		- [from meta](#from-meta)
+		- [from moment](#from-moment)
+	- [custom tokens](#custom-tokens)
+		- [simple value tokens](#simple-value-tokens)
+		- [calculated values](#calculated-values)
+	- [slugify on the fly](#slugify-on-the-fly)
+	- [node 4 LTS](#node-4-lts)
+	- [Author](#author)
+	- [Contributing](#contributing)
+	- [License](#license)
+
+<!-- /TOC -->
+
+
 ## install
 
 `npm i --save metalsmith-interpolate`
@@ -45,8 +66,9 @@ metalsmith()
 ```
 
 ## tokens
+-----
 
-__ from path __
+### from path
 
 properties returned by `path.parse`:
 
@@ -65,11 +87,11 @@ properties returned by `path.parse`:
  - *{ext}* includes the `.` in `.txt`
  - *{dir}* path from src directory
 
- __ from meta __
+### from meta
 
- any properties from the metalsmith `files` structure can be used as tokens
+any properties from the metalsmith `files` structure can be used as tokens
 
-__ from moment __
+### from moment
 
 basically any format tokens
 [from moment](http://momentjs.com/docs/#/displaying/) including only characters
@@ -81,8 +103,9 @@ otherwise `ctime` (file created time) is used instead. Note that moment can
 only parse dates formatted in limited ways.
 
 ## custom tokens
+-----
 
-__ simple value tokens __
+### simple value tokens
 
 You can add multiple objects to the interpolate arguments to make those
 properties available as tokens.
@@ -107,7 +130,7 @@ metalsmith()
 .build()
 ```
 
-__ calculated values __
+### calculated values
 
 You can also add custom a custom resolver function
 
@@ -151,4 +174,4 @@ branch.
 
 ## License
 
- - **MIT** : http://opensource.org/licenses/MIT
+[MIT](http://opensource.org/licenses/MIT)
