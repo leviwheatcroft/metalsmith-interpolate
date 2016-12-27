@@ -1,42 +1,47 @@
-# metalsmith-move
+# metalsmith-interpolate
 
-![nodei.co](https://nodei.co/npm/metalsmith-move.png?downloads=true&downloadRank=true&stars=true)
+![nodei.co](https://nodei.co/npm/metalsmith-interpolate.png?downloads=true&downloadRank=true&stars=true)
 
-![npm](https://img.shields.io/npm/v/metalsmith-move.svg)
+![npm](https://img.shields.io/npm/v/metalsmith-interpolate.svg)
 
-![github-issues](https://img.shields.io/github/issues/leviwheatcroft/metalsmith-move.svg)
+![github-issues](https://img.shields.io/github/issues/leviwheatcroft/metalsmith-interpolate.svg)
 
-![stars](https://img.shields.io/github/stars/leviwheatcroft/metalsmith-move.svg)
+![stars](https://img.shields.io/github/stars/leviwheatcroft/metalsmith-interpolate.svg)
 
-![forks](https://img.shields.io/github/forks/leviwheatcroft/metalsmith-move.svg)
+![forks](https://img.shields.io/github/forks/leviwheatcroft/metalsmith-interpolate.svg)
 
-[metalsmith](metalsmith.io) plugin to edit file paths
+[metalsmith](metalsmith.io) helper to interpolate strings
 
+[fancy annotated code](https://leviwheatcroft.github.io/metalsmith-interpolate/lib/index.js.html)
 
 ## install
 
-`npm i --save metalsmith-move`
+`npm i --save metalsmith-interpolate`
 
 ## usage
 
-Suppose your `src` contains three files:
+metalsmith-interpolate is not a plugin, it's a module designed to be used within
+plugins to provide a consistent interpolation API.
 
-```
-articles/one.html
-articles/two.html
-articles/three.html
-pages/about/projects.html
-```
+Suppose you made a plugin to generate a `coverImage` property for each article
 
-`move` would generate results like this in your `build` directory:
-```
+```javascript
+import {
+  each,
+  keys
+} from 'lodash'
+import metalsmith from 'metalsmith'
+import interpolate from 'metalsmith-interpolate'
+
 metalsmith()
-.use(move({
-  'articles/one.html'   : '{base}',               // one.html
-  'articles/two.html'   : 'blog/{YYYY}/{base}',   // blog/2016/two.html
-  'articles/three.html' : '{title}{ext}'          // article-title.html
-  'pages'               : '{relative}/{base}'     // about/projects.html
+...
+.use((files, metalsmith, done) => {
+  each(multimatch(keys(files), 'articles/**.*'), (src) => {
+    files[src].coverImage = interpolate('images/{name}.jpg', src, files)
+  })
 })
+.build()
+
 ```
 
 ## tokens
@@ -59,7 +64,10 @@ properties returned by `path.parse`:
  - *{name}*
  - *{ext}* includes the `.` in `.txt`
  - *{dir}* path from src directory
- - *{relative}* path from specified mask directory (see usage example)
+
+ __ from meta __
+
+ any properties from the metalsmith `files` structure can be used as tokens
 
 __ from moment __
 
@@ -70,27 +78,67 @@ whatever.
 
 If a `date` field is set in a file's frontmatter, then that value will be used,
 otherwise `ctime` (file created time) is used instead. Note that moment can
-only parse dates formatted in limited ways. You can patch the date parser as
-shown in the example below.
+only parse dates formatted in limited ways.
 
-__ from meta __
+## custom tokens
 
-`move` will check the file's meta for token matches, so `:title` will convert
-the file's title to a slug. You can patch the slug generation fn as shown above.
+__ simple value tokens __
 
-## options
+You can add multiple objects to the interpolate arguments to make those
+properties available as tokens.
 
+```javascript
+metalsmith()
+...
+.use((files, metalsmith, done) => {
+  each(multimatch(keys(files), 'articles/**.*'), (src) => {
+    let dimensions = {
+      width: 200,
+      height: 300
+    }
+    files[src].coverImage = interpolate(
+      'images/{name}_{width}_{height}.jpg',
+      src,
+      files,
+      dimensions
+    )
+  })
+})
+.build()
 ```
-.use(move(
-  {
-    'blog': '{YYYY/MMMM}/{title}'
-  },
-  {
-    date: (meta) => '2016-10-26',
-    slug: (str)  => str.replace(/\s/g, '_')
-  }
-))
+
+__ calculated values __
+
+You can also add custom a custom resolver function
+
+```javascript
+import { interpolate, resolvers } from 'metalsmith-interpolate'
+
+resolvers.unshift((token, meta) => if (token == 'firstTag') return meta.tags[0])
+
+metalsmith()
+...
+.use((files, metalsmith, done) => {
+  each(multimatch(keys(files), 'articles/**.*'), (src) => {
+    files[src].title = interpolate('{title} ({firstTag})', src, files)
+  })
+})
+.build()
 ```
+
+The `meta` argument passed to resolvers contains meta from metalsmith files
+structure, plus `path` property, plus any additional properties you passed in.
+
+The first resolver in the array which returns either a truthy value *or* an 0
+length string will be substituted for a given token.
+
+## slugify on the fly
+
+prefix a token with `-` or `_` like `{-title}` to slugify the token's value.
+
+## node 4 LTS
+
+`var mimeType = require('metalsmith-interpolate/dist/node4')`
 
 ## Author
 

@@ -1,7 +1,25 @@
-import { some, assign, isString } from 'lodash';
-import path from 'path';
-import moment from 'moment';
-import slug from 'slug';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.resolvers = exports.interpolate = undefined;
+
+var _lodash = require('lodash');
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _slug = require('slug');
+
+var _slug2 = _interopRequireDefault(_slug);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * ## interpolate
@@ -13,9 +31,13 @@ import slug from 'slug';
  *  metalsmith plugins
  * @param {Object} additional - any additional key value pairs for interpolation
  */
-function interpolate(format, src, files, ...additional) {
-  let meta = assign({}, ...additional);
-  if (isString(src)) assign(meta, files[src], { path: src });else assign(meta, src, files);
+function interpolate(format, src, files) {
+  for (var _len = arguments.length, additional = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+    additional[_key - 3] = arguments[_key];
+  }
+
+  let meta = _lodash.assign.apply(undefined, [{}].concat(additional));
+  if ((0, _lodash.isString)(src)) (0, _lodash.assign)(meta, files[src], { path: src });else (0, _lodash.assign)(meta, src, files);
 
   // match tokens like {foo}
   return format.replace(/\{([^}]+)\}/g, (match, token) => {
@@ -29,13 +51,13 @@ function interpolate(format, src, files, ...additional) {
       token = token.slice(1);
     }
 
-    resolved = some(resolvers, r => {
+    resolved = (0, _lodash.some)(resolvers, r => {
       result = r(token, meta);
       // an 0 length string should return true
-      return isString(result) || result;
+      return (0, _lodash.isString)(result) || result;
     });
     if (!resolved) throw new Error(`bad token: ${ token }`);
-    if (slugify) result = slug(result, slugify);
+    if (slugify) result = (0, _slug2.default)(result, slugify);
     return result;
   });
 }
@@ -56,7 +78,7 @@ function interpolate(format, src, files, ...additional) {
  */
 let resolvers = [
 // check `path.parse()`` results for token
-(token, meta) => path.parse(meta.path)[token],
+(token, meta) => _path2.default.parse(meta.path)[token],
 // check meta properties for token
 (token, meta) => meta[token],
 // check token against moment formats
@@ -66,11 +88,12 @@ let resolvers = [
     let date;
     // I personally use `modifiedDate` and `publishedDate`, maybe it's only me
     // this is probably quite brittle, will see what issues arises
-    date = moment(meta.modifiedDate || meta.publishedDate || meta.date || meta.stats.ctime);
+    date = (0, _moment2.default)(meta.modifiedDate || meta.publishedDate || meta.date || meta.stats.ctime);
     if (!date.isValid()) throw new Error(`no date: ${ meta.path }`);
     return date.format(token);
   }
 }];
 
-export default interpolate;
-export { interpolate, resolvers };
+exports.default = interpolate;
+exports.interpolate = interpolate;
+exports.resolvers = resolvers;
