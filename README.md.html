@@ -34,6 +34,12 @@
         <a href="#custom%20tokens">custom tokens</a>
       </div>
       <div class="heading h2">
+        <a href="#slugify%20on%20the%20fly">slugify on the fly</a>
+      </div>
+      <div class="heading h2">
+        <a href="#node%204%20lts">node 4 LTS</a>
+      </div>
+      <div class="heading h2">
         <a href="#author">Author</a>
       </div>
       <div class="heading h2">
@@ -120,10 +126,6 @@ plugins to provide a consistent interpolation API.</p>
 </div>
 
 
-<p><em>_ slugify _</em></p>
-
-<p>prefix a token with <code>-</code> or <code>_</code> to slugify the token's value.</p>
-
 <p><em>_ from path _</em></p>
 
 <p>properties returned by <code>path.parse</code>:</p>
@@ -144,7 +146,7 @@ plugins to provide a consistent interpolation API.</p>
 
 <p><em>_ from meta _</em></p>
 
-<p>any properties from the <code>files</code> structure can be used as tokens</p></li>
+<p>any properties from the metalsmith <code>files</code> structure can be used as tokens</p></li>
 </ul>
 
 <p><em>_ from moment _</em></p>
@@ -156,8 +158,7 @@ whatever.</p>
 
 <p>If a <code>date</code> field is set in a file's frontmatter, then that value will be used,
 otherwise <code>ctime</code> (file created time) is used instead. Note that moment can
-only parse dates formatted in limited ways. You can patch the date parser as
-shown in the example below.</p>
+only parse dates formatted in limited ways.</p>
 
 
 <div class="pilwrap" id="custom%20tokens">
@@ -223,6 +224,28 @@ structure, plus <code>path</code> property, plus any additional properties you p
 length string will be substituted for a given token.</p>
 
 
+<div class="pilwrap" id="slugify%20on%20the%20fly">
+  <h2>
+    <a href="#slugify%20on%20the%20fly" name="slugify%20on%20the%20fly" class="pilcrow">&#182;</a>
+    slugify on the fly
+  </h2>
+</div>
+
+
+<p>prefix a token with <code>-</code> or <code>_</code> like <code>{-title}</code> to slugify the token's value.</p>
+
+
+<div class="pilwrap" id="node%204%20lts">
+  <h2>
+    <a href="#node%204%20lts" name="node%204%20lts" class="pilcrow">&#182;</a>
+    node 4 LTS
+  </h2>
+</div>
+
+
+<p><code>var mimeType = require('metalsmith-interpolate/dist/node4')</code></p>
+
+
 <div class="pilwrap" id="author">
   <h2>
     <a href="#author" name="author" class="pilcrow">&#182;</a>
@@ -231,7 +254,7 @@ length string will be substituted for a given token.</p>
 </div>
 
 
-<p>Levi Wheatcroft <a href="&#109;&#97;&#x69;&#x6C;&#116;&#111;:&#108;&#x65;&#118;i&#64;&#119;&#x68;&#116;&#x2E;&#99;&#114;">&#108;&#x65;&#118;i&#64;&#119;&#x68;&#116;&#x2E;&#99;&#114;</a></p>
+<p>Levi Wheatcroft <a href="&#109;&#x61;i&#x6C;&#116;&#111;:&#x6C;&#x65;&#118;&#105;&#x40;&#119;&#104;&#x74;&#x2E;&#99;&#x72;">&#x6C;&#x65;&#118;&#105;&#x40;&#119;&#104;&#x74;&#x2E;&#99;&#x72;</a></p>
 
 
 <div class="pilwrap" id="contributing">
