@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>README.md</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "README.md", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#metalsmith-interpolate">metalsmith-interpolate</a>
+      </div>
+      <div class="heading h2">
+        <a href="#install">install</a>
+      </div>
+      <div class="heading h2">
+        <a href="#usage">usage</a>
+      </div>
+      <div class="heading h2">
+        <a href="#tokens">tokens</a>
+      </div>
+      <div class="heading h2">
+        <a href="#custom%20tokens">custom tokens</a>
+      </div>
+      <div class="heading h2">
+        <a href="#author">Author</a>
+      </div>
+      <div class="heading h2">
+        <a href="#contributing">Contributing</a>
+      </div>
+      <div class="heading h2">
+        <a href="#license">License</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="docs markdown">
+<div class="pilwrap" id="metalsmith-interpolate">
+  <h1>
+    <a href="#metalsmith-interpolate" name="metalsmith-interpolate" class="pilcrow">&#182;</a>
+    metalsmith-interpolate
+  </h1>
+</div>
+
+
+<p><img src="https://nodei.co/npm/metalsmith-interpolate.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="nodei.co" title="" /></p>
+
+<p><img src="https://img.shields.io/npm/v/metalsmith-interpolate.svg" alt="npm" title="" /></p>
+
+<p><img src="https://img.shields.io/github/issues/leviwheatcroft/metalsmith-interpolate.svg" alt="github-issues" title="" /></p>
+
+<p><img src="https://img.shields.io/github/stars/leviwheatcroft/metalsmith-interpolate.svg" alt="stars" title="" /></p>
+
+<p><img src="https://img.shields.io/github/forks/leviwheatcroft/metalsmith-interpolate.svg" alt="forks" title="" /></p>
+
+<p><a href="metalsmith.io">metalsmith</a> helper to interpolate strings</p>
+
+
+<div class="pilwrap" id="install">
+  <h2>
+    <a href="#install" name="install" class="pilcrow">&#182;</a>
+    install
+  </h2>
+</div>
+
+
+<p><code>npm i --save metalsmith-interpolate</code></p>
+
+
+<div class="pilwrap" id="usage">
+  <h2>
+    <a href="#usage" name="usage" class="pilcrow">&#182;</a>
+    usage
+  </h2>
+</div>
+
+
+<p>metalsmith-interpolate is not a plugin, it's a module designed to be used within
+plugins to provide a consistent interpolation API.</p>
+
+<p>Suppose you made a plugin to generate a <code>coverImage</code> property for each article</p>
+
+
+<div class="highlight"><pre><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">each</span><span class="p">,</span>
+  <span class="nx">keys</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;lodash&#39;</span>
+<span class="kr">import</span> <span class="nx">metalsmith</span> <span class="nx">from</span> <span class="s1">&#39;metalsmith&#39;</span>
+<span class="kr">import</span> <span class="nx">interpolate</span> <span class="nx">from</span> <span class="s1">&#39;metalsmith-interpolate&#39;</span>
+
+<span class="nx">metalsmith</span><span class="p">()</span>
+<span class="p">...</span>
+<span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">files</span><span class="p">,</span> <span class="nx">metalsmith</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">each</span><span class="p">(</span><span class="nx">multimatch</span><span class="p">(</span><span class="nx">keys</span><span class="p">(</span><span class="nx">files</span><span class="p">),</span> <span class="s1">&#39;articles/**.*&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">files</span><span class="p">[</span><span class="nx">src</span><span class="p">].</span><span class="nx">coverImage</span> <span class="o">=</span> <span class="nx">interpolate</span><span class="p">(</span><span class="s1">&#39;images/{name}.jpg&#39;</span><span class="p">,</span> <span class="nx">src</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">build</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+
+<div class="pilwrap" id="tokens">
+  <h2>
+    <a href="#tokens" name="tokens" class="pilcrow">&#182;</a>
+    tokens
+  </h2>
+</div>
+
+
+<p><em>_ slugify _</em></p>
+
+<p>prefix a token with <code>-</code> or <code>_</code> to slugify the token's value.</p>
+
+<p><em>_ from path _</em></p>
+
+<p>properties returned by <code>path.parse</code>:</p>
+
+<div class='highlight'><pre><code language=''>┌─────────────────────┬────────────┐
+│          dir        │    base    │
+├──────┬              ├──────┬─────┤
+│ root │              │ name │ ext │
+"  /    home/user/dir / file  .txt "
+└──────┴──────────────┴──────┴─────┘
+</code></pre></div>
+
+<ul>
+<li><em>{base}</em> name &amp; ext</li>
+<li><em>{name}</em></li>
+<li><em>{ext}</em> includes the <code>.</code> in <code>.txt</code></li>
+<li><p><em>{dir}</em> path from src directory</p>
+
+<p><em>_ from meta _</em></p>
+
+<p>any properties from the <code>files</code> structure can be used as tokens</p></li>
+</ul>
+
+<p><em>_ from moment _</em></p>
+
+<p>basically any format tokens
+<a href="http://momentjs.com/docs/#/displaying/">from moment</a> including only characters
+defined by <code>/[MDY\-_\.\/]/</code>. So <code>{YYYY/MMMM}</code> returns <code>2016/October</code> or
+whatever.</p>
+
+<p>If a <code>date</code> field is set in a file's frontmatter, then that value will be used,
+otherwise <code>ctime</code> (file created time) is used instead. Note that moment can
+only parse dates formatted in limited ways. You can patch the date parser as
+shown in the example below.</p>
+
+
+<div class="pilwrap" id="custom%20tokens">
+  <h2>
+    <a href="#custom%20tokens" name="custom%20tokens" class="pilcrow">&#182;</a>
+    custom tokens
+  </h2>
+</div>
+
+
+<p><em>_ simple value tokens _</em></p>
+
+<p>You can add multiple objects to the interpolate arguments to make those
+properties available as tokens.</p>
+
+
+<div class="highlight"><pre><code><span class="nx">metalsmith</span><span class="p">()</span>
+<span class="p">...</span>
+<span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">files</span><span class="p">,</span> <span class="nx">metalsmith</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">each</span><span class="p">(</span><span class="nx">multimatch</span><span class="p">(</span><span class="nx">keys</span><span class="p">(</span><span class="nx">files</span><span class="p">),</span> <span class="s1">&#39;articles/**.*&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">width</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+      <span class="nx">height</span><span class="o">:</span> <span class="mi">300</span>
+    <span class="p">}</span>
+    <span class="nx">files</span><span class="p">[</span><span class="nx">src</span><span class="p">].</span><span class="nx">coverImage</span> <span class="o">=</span> <span class="nx">interpolate</span><span class="p">(</span>
+      <span class="s1">&#39;images/{name}_{width}_{height}.jpg&#39;</span><span class="p">,</span>
+      <span class="nx">src</span><span class="p">,</span>
+      <span class="nx">files</span><span class="p">,</span>
+      <span class="nx">dimensions</span>
+    <span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">build</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+<p><em>_ calculated values _</em></p>
+
+<p>You can also add custom a custom resolver function</p>
+
+
+<div class="highlight"><pre><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">interpolate</span><span class="p">,</span> <span class="nx">resolvers</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;metalsmith-interpolate&#39;</span>
+
+<span class="nx">resolvers</span><span class="p">.</span><span class="nx">unshift</span><span class="p">((</span><span class="nx">token</span><span class="p">,</span> <span class="nx">meta</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="nx">token</span> <span class="o">==</span> <span class="s1">&#39;firstTag&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="nx">meta</span><span class="p">.</span><span class="nx">tags</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nx">metalsmith</span><span class="p">()</span>
+<span class="p">...</span>
+<span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">files</span><span class="p">,</span> <span class="nx">metalsmith</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">each</span><span class="p">(</span><span class="nx">multimatch</span><span class="p">(</span><span class="nx">keys</span><span class="p">(</span><span class="nx">files</span><span class="p">),</span> <span class="s1">&#39;articles/**.*&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">files</span><span class="p">[</span><span class="nx">src</span><span class="p">].</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">interpolate</span><span class="p">(</span><span class="s1">&#39;{title} ({firstTag})&#39;</span><span class="p">,</span> <span class="nx">src</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">build</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+<p>The <code>meta</code> argument passed to resolvers contains meta from metalsmith files
+structure, plus <code>path</code> property, plus any additional properties you passed in.</p>
+
+<p>The first resolver in the array which returns either a truthy value <em>or</em> an 0
+length string will be substituted for a given token.</p>
+
+
+<div class="pilwrap" id="author">
+  <h2>
+    <a href="#author" name="author" class="pilcrow">&#182;</a>
+    Author
+  </h2>
+</div>
+
+
+<p>Levi Wheatcroft <a href="&#109;&#97;&#x69;&#x6C;&#116;&#111;:&#108;&#x65;&#118;i&#64;&#119;&#x68;&#116;&#x2E;&#99;&#114;">&#108;&#x65;&#118;i&#64;&#119;&#x68;&#116;&#x2E;&#99;&#114;</a></p>
+
+
+<div class="pilwrap" id="contributing">
+  <h2>
+    <a href="#contributing" name="contributing" class="pilcrow">&#182;</a>
+    Contributing
+  </h2>
+</div>
+
+
+<p>Contributions welcome; Please submit all pull requests against the master
+branch.</p>
+
+
+<div class="pilwrap" id="license">
+  <h2>
+    <a href="#license" name="license" class="pilcrow">&#182;</a>
+    License
+  </h2>
+</div>
+
+
+<ul>
+<li><strong>MIT</strong> : <a href='http://opensource.org/licenses/MIT'>http://opensource.org/licenses/MIT</a></li>
+</ul></div>
+  </div>
+</body>
+</html>

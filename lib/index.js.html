@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "lib/index.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h2">
+        <a href="#interpolate">interpolate</a>
+      </div>
+      <div class="heading h2">
+        <a href="#resolvers%20array">resolvers array</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>index.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">some</span><span class="p">,</span>
+  <span class="nx">assign</span><span class="p">,</span>
+  <span class="nx">isString</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;lodash&#39;</span>
+<span class="kr">import</span> <span class="nx">path</span> <span class="nx">from</span> <span class="s1">&#39;path&#39;</span>
+<span class="kr">import</span> <span class="nx">moment</span> <span class="nx">from</span> <span class="s1">&#39;moment&#39;</span>
+<span class="kr">import</span> <span class="nx">slug</span> <span class="nx">from</span> <span class="s1">&#39;slug&#39;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="interpolate">
+  <h2>
+    <a href="#interpolate" name="interpolate" class="pilcrow">&#182;</a>
+    interpolate
+  </h2>
+</div>
+
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">format</span>
+      <span class="dox_type">String</span>
+      <span><ul>
+<li>a format string with tokens delimited by curly
+braces.</li>
+</ul></span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">src</span>
+      <span class="dox_type">String</span>
+      <span><ul>
+<li>the key for this file in metadata</li>
+</ul></span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">files</span>
+      <span class="dox_type">Object</span>
+      <span><ul>
+<li>the metadata / files structure as passed to
+metalsmith plugins</li>
+</ul></span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">additional</span>
+      <span class="dox_type">Object</span>
+      <span><ul>
+<li>any additional key value pairs for interpolation</li>
+</ul></span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">function</span> <span class="nx">interpolate</span> <span class="p">(</span><span class="nx">format</span><span class="p">,</span> <span class="nx">src</span><span class="p">,</span> <span class="nx">files</span><span class="p">,</span> <span class="p">...</span><span class="nx">additional</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">meta</span> <span class="o">=</span> <span class="nx">assign</span><span class="p">({},</span> <span class="p">...</span><span class="nx">additional</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isString</span><span class="p">(</span><span class="nx">src</span><span class="p">))</span> <span class="nx">assign</span><span class="p">(</span><span class="nx">meta</span><span class="p">,</span> <span class="nx">files</span><span class="p">[</span><span class="nx">src</span><span class="p">],</span> <span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="nx">src</span> <span class="p">})</span>
+  <span class="k">else</span> <span class="nx">assign</span><span class="p">(</span><span class="nx">meta</span><span class="p">,</span> <span class="nx">src</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>match tokens like {foo}</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="k">return</span> <span class="nx">format</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\{([^}]+)\}/g</span><span class="p">,</span> <span class="p">(</span><span class="nx">match</span><span class="p">,</span> <span class="nx">token</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">slugify</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="kd">let</span> <span class="nx">result</span>
+    <span class="kd">let</span> <span class="nx">resolved</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>check for slugify tag</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">if</span> <span class="p">(</span><span class="sr">/^[-_]/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">token</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">slugify</span> <span class="o">=</span> <span class="nx">token</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="nx">token</span> <span class="o">=</span> <span class="nx">token</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nx">resolved</span> <span class="o">=</span> <span class="nx">some</span><span class="p">(</span><span class="nx">resolvers</span><span class="p">,</span> <span class="p">(</span><span class="nx">r</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">result</span> <span class="o">=</span> <span class="nx">r</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="nx">meta</span><span class="p">)</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>an 0 length string should return true</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="k">return</span> <span class="nx">isString</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="o">||</span> <span class="nx">result</span>
+    <span class="p">})</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">resolved</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="err">`</span><span class="nx">bad</span> <span class="nx">token</span><span class="o">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">token</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">slugify</span><span class="p">)</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">slug</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">slugify</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">result</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="resolvers%20array">
+  <h2>
+    <a href="#resolvers%20array" name="resolvers%20array" class="pilcrow">&#182;</a>
+    resolvers array
+  </h2>
+</div>
+
+
+<p>this array is exported as a poor man's plugin interface. <code>interpolate</code>
+iterates over all functions in the <code>resolvers</code> array. therefore you can use
+<code>resolvers.push()</code> or <code>resolvers.shift()</code> to add functions which resolver
+tokens</p>
+  </div>
+  <div class="body">
+<div class="highlight"><pre><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">interpolate</span><span class="p">,</span> <span class="nx">resolvers</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;metalsmith-interpolate&#39;</span>
+<span class="nx">resolvers</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span>
+  <span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="nx">meta</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="nx">token</span> <span class="o">==</span> <span class="s1">&#39;firstTag&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="nx">meta</span><span class="p">.</span><span class="nx">tags</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
+
+
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">let</span> <span class="nx">resolvers</span> <span class="o">=</span> <span class="p">[</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>check `path.parse()`` results for token</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="nx">meta</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">path</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">meta</span><span class="p">.</span><span class="nx">path</span><span class="p">)[</span><span class="nx">token</span><span class="p">],</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>check meta properties for token</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="nx">meta</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">meta</span><span class="p">[</span><span class="nx">token</span><span class="p">],</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>check token against moment formats</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="nx">meta</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p>ugly negated regex will pass if only listed chars are present</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="sr">/[^MDY\-_./]/</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">token</span><span class="p">))</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">date</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<p>I personally use <code>modifiedDate</code> and <code>publishedDate</code>, maybe it's only me
+this is probably quite brittle, will see what issues arise</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">date</span> <span class="o">=</span> <span class="nx">moment</span><span class="p">(</span>
+        <span class="nx">meta</span><span class="p">.</span><span class="nx">modifiedDate</span> <span class="o">||</span>
+        <span class="nx">meta</span><span class="p">.</span><span class="nx">publishedDate</span> <span class="o">||</span>
+        <span class="nx">meta</span><span class="p">.</span><span class="nx">date</span> <span class="o">||</span>
+        <span class="nx">meta</span><span class="p">.</span><span class="nx">stats</span><span class="p">.</span><span class="nx">ctime</span>
+      <span class="p">)</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">date</span><span class="p">.</span><span class="nx">isValid</span><span class="p">())</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="err">`</span><span class="nx">no</span> <span class="nx">date</span><span class="o">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">meta</span><span class="p">.</span><span class="nx">path</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nx">date</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">interpolate</span>
+<span class="kr">export</span> <span class="p">{</span> <span class="nx">interpolate</span><span class="p">,</span> <span class="nx">resolvers</span> <span class="p">}</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
