@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-interpolate",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "metalsmith helper to interpolate strings",
   "main": "dist/index.js",
   "scripts": {
