@@ -56,7 +56,7 @@ function interpolate(format, src, files) {
       // an 0 length string should return true
       return (0, _lodash.isString)(result) || result;
     });
-    if (!resolved) throw new Error(`bad token: ${ token }`);
+    if (!resolved) throw new Error(`bad token: "${ token }" in ${ src }"`);
     if (slugify) result = (0, _slug2.default)(result, slugify);
     return result;
   });
