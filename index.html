@@ -6,9 +6,12 @@
   <link rel="stylesheet" media="all" href="doc-style.css" />
   <script src="doc-filelist.js"></script>
   <script>
-    var relativeDir = "", thisFile = "README.md", defaultSidebar = true;
+    var relativeDir = "";
+    var thisFile = "README.md";
+    var defaultSidebar = true;
   </script>
   <script src="doc-script.js"></script>
+
 </head>
 <body>
   <div id="sidebar_wrapper">
@@ -18,341 +21,285 @@
     </div>
     <div id="tree"></div>
     <div id="headings">
+
       <div class="heading h1">
         <a href="#metalsmith-interpolate">metalsmith-interpolate</a>
       </div>
+
       <div class="heading h2">
         <a href="#install">install</a>
       </div>
+
       <div class="heading h2">
         <a href="#usage">usage</a>
       </div>
+
       <div class="heading h2">
         <a href="#tokens">tokens</a>
       </div>
+
       <div class="heading h3">
-        <a href="#tokens%20from%20path">tokens from path</a>
+        <a href="#tokens-from-path">tokens from path</a>
       </div>
+
       <div class="heading h3">
-        <a href="#tokens%20from%20meta">tokens from meta</a>
+        <a href="#tokens-from-meta">tokens from meta</a>
       </div>
+
       <div class="heading h3">
-        <a href="#tokens%20from%20moment">tokens from moment</a>
+        <a href="#tokens-from-moment">tokens from moment</a>
       </div>
+
       <div class="heading h2">
-        <a href="#custom%20tokens">custom tokens</a>
+        <a href="#custom-tokens">custom tokens</a>
       </div>
+
       <div class="heading h3">
-        <a href="#simple%20value%20tokens">simple value tokens</a>
+        <a href="#simple-value-tokens">simple value tokens</a>
       </div>
+
       <div class="heading h3">
-        <a href="#calculated%20value%20tokens">calculated value tokens</a>
+        <a href="#calculated-value-tokens">calculated value tokens</a>
       </div>
+
       <div class="heading h2">
-        <a href="#slugify%20on%20the%20fly">slugify on the fly</a>
+        <a href="#slugify-on-the-fly">slugify on the fly</a>
       </div>
+
       <div class="heading h2">
         <a href="#compatibility">compatibility</a>
       </div>
+
       <div class="heading h2">
         <a href="#author">Author</a>
       </div>
+
       <div class="heading h2">
         <a href="#contributing">Contributing</a>
       </div>
+
       <div class="heading h2">
         <a href="#license">License</a>
       </div>
+
     </div>
   </div>
   <div id="sidebar-toggle"></div>
-  <div id="container"><div class="docs markdown">
-<div class="pilwrap" id="metalsmith-interpolate">
+  <div id="container">
+    <div class="docs markdown"><div class="pilwrap" id="metalsmith-interpolate">
   <h1>
-    <a href="#metalsmith-interpolate" name="metalsmith-interpolate" class="pilcrow">&#182;</a>
-    metalsmith-interpolate
+    <a href="#metalsmith-interpolate" name="metalsmith-interpolate" class="pilcrow"></a>
+metalsmith-interpolate
   </h1>
 </div>
-
-
-<p><img src="https://nodei.co/npm/metalsmith-interpolate.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="nodei.co" title="" /></p>
-
-<p><img src="https://img.shields.io/npm/v/metalsmith-interpolate.svg" alt="npm" title="" /></p>
-
-<p><img src="https://img.shields.io/github/issues/leviwheatcroft/metalsmith-interpolate.svg" alt="github-issues" title="" /></p>
-
-<p><img src="https://img.shields.io/github/stars/leviwheatcroft/metalsmith-interpolate.svg" alt="stars" title="" /></p>
-
-<p><img src="https://img.shields.io/github/forks/leviwheatcroft/metalsmith-interpolate.svg" alt="forks" title="" /></p>
-
-<p><a href="metalsmith.io">metalsmith</a> helper to interpolate strings</p>
-
+<p><img src="https://nodei.co/npm/metalsmith-interpolate.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="nodei.co"></p>
+<p><img src="https://img.shields.io/npm/v/metalsmith-interpolate.svg" alt="npm"></p>
+<p><img src="https://img.shields.io/github/issues/leviwheatcroft/metalsmith-interpolate.svg" alt="github-issues"></p>
+<p><img src="https://img.shields.io/github/stars/leviwheatcroft/metalsmith-interpolate.svg" alt="stars"></p>
+<p><img src="https://img.shields.io/github/forks/leviwheatcroft/metalsmith-interpolate.svg" alt="forks"></p>
+<p><a href="metalsmith.io.html">metalsmith</a> helper to interpolate strings</p>
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
 <ul>
-<li><a href="#pkgname">metalsmith-interpolate</a>
-<ul><li><a href="#install">install</a></li>
-<li><a href="#usage">usage</a></li>
-<li><a href="#tokens">tokens</a>
-<ul><li><a href="#tokens-from-path">tokens from path</a></li>
-<li><a href="#tokens-from-meta">tokens from meta</a></li>
-<li><a href="#tokens-from-moment">tokens from moment</a></li></ul></li>
-<li><a href="#custom-tokens">custom tokens</a>
-<ul><li><a href="#simple-value-tokens">simple value tokens</a></li>
-<li><a href="#calculated-value-tokens">calculated value tokens</a></li></ul></li>
-<li><a href="#slugify-on-the-fly">slugify on the fly</a></li>
-<li><a href="#compatibility">compatibility</a></li>
-<li><a href="#author">Author</a></li>
-<li><a href="#contributing">Contributing</a></li>
-<li><a href="#license">License</a></li></ul></li>
+<li><a href="#pkgname.html">metalsmith-interpolate</a>
+<ul>
+<li><a href="#install.html">install</a></li>
+<li><a href="#usage.html">usage</a></li>
+<li><a href="#tokens.html">tokens</a>
+<ul>
+<li><a href="#tokens-from-path.html">tokens from path</a></li>
+<li><a href="#tokens-from-meta.html">tokens from meta</a></li>
+<li><a href="#tokens-from-moment.html">tokens from moment</a></li>
 </ul>
-
+</li>
+<li><a href="#custom-tokens.html">custom tokens</a>
+<ul>
+<li><a href="#simple-value-tokens.html">simple value tokens</a></li>
+<li><a href="#calculated-value-tokens.html">calculated value tokens</a></li>
+</ul>
+</li>
+<li><a href="#slugify-on-the-fly.html">slugify on the fly</a></li>
+<li><a href="#compatibility.html">compatibility</a></li>
+<li><a href="#author.html">Author</a></li>
+<li><a href="#contributing.html">Contributing</a></li>
+<li><a href="#license.html">License</a></li>
+</ul>
+</li>
+</ul>
 <!-- /TOC -->TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-
 <div class="pilwrap" id="install">
   <h2>
-    <a href="#install" name="install" class="pilcrow">&#182;</a>
-    install
+    <a href="#install" name="install" class="pilcrow"></a>
+install
   </h2>
 </div>
-
-
 <p><code>npm i --save metalsmith-interpolate</code></p>
-
-
 <div class="pilwrap" id="usage">
   <h2>
-    <a href="#usage" name="usage" class="pilcrow">&#182;</a>
-    usage
+    <a href="#usage" name="usage" class="pilcrow"></a>
+usage
   </h2>
 </div>
-
-
 <p>metalsmith-interpolate is not a plugin, it's a module designed to be used within
 plugins to provide a consistent interpolation API.</p>
-
 <p>Suppose you made a plugin to generate a <code>coverImage</code> property for each article</p>
+<pre><code class="javascript"><span class="hljs-keyword">import</span> {
+  each,
+  keys
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
+<span class="hljs-keyword">import</span> metalsmith <span class="hljs-keyword">from</span> <span class="hljs-string">'metalsmith'</span>
+<span class="hljs-keyword">import</span> interpolate <span class="hljs-keyword">from</span> <span class="hljs-string">'metalsmith-interpolate'</span>
 
+metalsmith()
+...
+.use(<span class="hljs-function">(<span class="hljs-params">files, metalsmith, done</span>) =&gt;</span> {
+  each(multimatch(keys(files), <span class="hljs-string">'articles/**.*'</span>), (src) =&gt; {
+    files[src].coverImage = interpolate(<span class="hljs-string">'images/{name}.jpg'</span>, src, files)
+  })
+})
+.build()
 
-<div class="highlight"><pre><code><span class="kr">import</span> <span class="p">{</span>
-  <span class="nx">each</span><span class="p">,</span>
-  <span class="nx">keys</span>
-<span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;lodash&#39;</span>
-<span class="kr">import</span> <span class="nx">metalsmith</span> <span class="nx">from</span> <span class="s1">&#39;metalsmith&#39;</span>
-<span class="kr">import</span> <span class="nx">interpolate</span> <span class="nx">from</span> <span class="s1">&#39;metalsmith-interpolate&#39;</span>
-
-<span class="nx">metalsmith</span><span class="p">()</span>
-<span class="p">...</span>
-<span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">files</span><span class="p">,</span> <span class="nx">metalsmith</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">each</span><span class="p">(</span><span class="nx">multimatch</span><span class="p">(</span><span class="nx">keys</span><span class="p">(</span><span class="nx">files</span><span class="p">),</span> <span class="s1">&#39;articles/**.*&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">files</span><span class="p">[</span><span class="nx">src</span><span class="p">].</span><span class="nx">coverImage</span> <span class="o">=</span> <span class="nx">interpolate</span><span class="p">(</span><span class="s1">&#39;images/{name}.jpg&#39;</span><span class="p">,</span> <span class="nx">src</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span>
-  <span class="p">})</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">build</span><span class="p">()</span>
-</code></pre></div>
-
-
-
-
+</code></pre>
 <div class="pilwrap" id="tokens">
   <h2>
-    <a href="#tokens" name="tokens" class="pilcrow">&#182;</a>
-    tokens
+    <a href="#tokens" name="tokens" class="pilcrow"></a>
+tokens
   </h2>
 </div>
-
-
-
-<div class="pilwrap" id="tokens%20from%20path">
+<div class="pilwrap" id="tokens-from-path">
   <h3>
-    <a href="#tokens%20from%20path" name="tokens%20from%20path" class="pilcrow">&#182;</a>
-    tokens from path
+    <a href="#tokens-from-path" name="tokens-from-path" class="pilcrow"></a>
+tokens from path
   </h3>
 </div>
-
-
 <p>properties returned by <code>path.parse</code>:</p>
-
-<div class='highlight'><pre><code language=''>┌─────────────────────┬────────────┐
+<pre><code>┌─────────────────────┬────────────┐
 │          dir        │    base    │
 ├──────┬              ├──────┬─────┤
 │ root │              │ name │ ext │
-"  /    home/user/dir / file  .txt "
+&quot;  /    home/user/dir / file  .txt &quot;
 └──────┴──────────────┴──────┴─────┘
-</code></pre></div>
-
+</code></pre>
 <ul>
 <li><em>{base}</em> name &amp; ext</li>
 <li><em>{name}</em></li>
 <li><em>{ext}</em> includes the <code>.</code> in <code>.txt</code></li>
 <li><em>{dir}</em> path from src directory</li>
 </ul>
-
-
-<div class="pilwrap" id="tokens%20from%20meta">
+<div class="pilwrap" id="tokens-from-meta">
   <h3>
-    <a href="#tokens%20from%20meta" name="tokens%20from%20meta" class="pilcrow">&#182;</a>
-    tokens from meta
+    <a href="#tokens-from-meta" name="tokens-from-meta" class="pilcrow"></a>
+tokens from meta
   </h3>
 </div>
-
-
 <p>any properties from the metalsmith <code>files</code> structure can be used as tokens</p>
-
-
-<div class="pilwrap" id="tokens%20from%20moment">
+<div class="pilwrap" id="tokens-from-moment">
   <h3>
-    <a href="#tokens%20from%20moment" name="tokens%20from%20moment" class="pilcrow">&#182;</a>
-    tokens from moment
+    <a href="#tokens-from-moment" name="tokens-from-moment" class="pilcrow"></a>
+tokens from moment
   </h3>
 </div>
-
-
 <p>basically any format tokens
 <a href="http://momentjs.com/docs/#/displaying/">from moment</a> including only characters
 defined by <code>/[MDY\-_\.\/]/</code>. So <code>{YYYY/MMMM}</code> returns <code>2016/October</code> or
 whatever.</p>
-
 <p>If a <code>date</code> field is set in a file's frontmatter, then that value will be used,
 otherwise <code>ctime</code> (file created time) is used instead. Note that moment can
 only parse dates formatted in limited ways.</p>
-
-
-<div class="pilwrap" id="custom%20tokens">
+<div class="pilwrap" id="custom-tokens">
   <h2>
-    <a href="#custom%20tokens" name="custom%20tokens" class="pilcrow">&#182;</a>
-    custom tokens
+    <a href="#custom-tokens" name="custom-tokens" class="pilcrow"></a>
+custom tokens
   </h2>
 </div>
-
-
-
-<div class="pilwrap" id="simple%20value%20tokens">
+<div class="pilwrap" id="simple-value-tokens">
   <h3>
-    <a href="#simple%20value%20tokens" name="simple%20value%20tokens" class="pilcrow">&#182;</a>
-    simple value tokens
+    <a href="#simple-value-tokens" name="simple-value-tokens" class="pilcrow"></a>
+simple value tokens
   </h3>
 </div>
-
-
 <p>You can add multiple objects to the interpolate arguments to make those
 properties available as tokens.</p>
-
-
-<div class="highlight"><pre><code><span class="nx">metalsmith</span><span class="p">()</span>
-<span class="p">...</span>
-<span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">files</span><span class="p">,</span> <span class="nx">metalsmith</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">each</span><span class="p">(</span><span class="nx">multimatch</span><span class="p">(</span><span class="nx">keys</span><span class="p">(</span><span class="nx">files</span><span class="p">),</span> <span class="s1">&#39;articles/**.*&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="nx">width</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
-      <span class="nx">height</span><span class="o">:</span> <span class="mi">300</span>
-    <span class="p">}</span>
-    <span class="nx">files</span><span class="p">[</span><span class="nx">src</span><span class="p">].</span><span class="nx">coverImage</span> <span class="o">=</span> <span class="nx">interpolate</span><span class="p">(</span>
-      <span class="s1">&#39;images/{name}_{width}_{height}.jpg&#39;</span><span class="p">,</span>
-      <span class="nx">src</span><span class="p">,</span>
-      <span class="nx">files</span><span class="p">,</span>
-      <span class="nx">dimensions</span>
-    <span class="p">)</span>
-  <span class="p">})</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">build</span><span class="p">()</span>
-</code></pre></div>
-
-
-
-
-<div class="pilwrap" id="calculated%20value%20tokens">
+<pre><code class="javascript">metalsmith()
+...
+.use(<span class="hljs-function">(<span class="hljs-params">files, metalsmith, done</span>) =&gt;</span> {
+  each(multimatch(keys(files), <span class="hljs-string">'articles/**.*'</span>), (src) =&gt; {
+    <span class="hljs-keyword">let</span> dimensions = {
+      <span class="hljs-attr">width</span>: <span class="hljs-number">200</span>,
+      <span class="hljs-attr">height</span>: <span class="hljs-number">300</span>
+    }
+    files[src].coverImage = interpolate(
+      <span class="hljs-string">'images/{name}_{width}_{height}.jpg'</span>,
+      src,
+      files,
+      dimensions
+    )
+  })
+})
+.build()
+</code></pre>
+<div class="pilwrap" id="calculated-value-tokens">
   <h3>
-    <a href="#calculated%20value%20tokens" name="calculated%20value%20tokens" class="pilcrow">&#182;</a>
-    calculated value tokens
+    <a href="#calculated-value-tokens" name="calculated-value-tokens" class="pilcrow"></a>
+calculated value tokens
   </h3>
 </div>
-
-
 <p>You can also add custom a custom resolver function</p>
+<pre><code class="javascript"><span class="hljs-keyword">import</span> { interpolate, resolvers } <span class="hljs-keyword">from</span> <span class="hljs-string">'metalsmith-interpolate'</span>
 
+resolvers.unshift(<span class="hljs-function">(<span class="hljs-params">token, meta</span>) =&gt;</span> <span class="hljs-keyword">if</span> (token == <span class="hljs-string">'firstTag'</span>) <span class="hljs-keyword">return</span> meta.tags[<span class="hljs-number">0</span>])
 
-<div class="highlight"><pre><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">interpolate</span><span class="p">,</span> <span class="nx">resolvers</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;metalsmith-interpolate&#39;</span>
-
-<span class="nx">resolvers</span><span class="p">.</span><span class="nx">unshift</span><span class="p">((</span><span class="nx">token</span><span class="p">,</span> <span class="nx">meta</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="nx">token</span> <span class="o">==</span> <span class="s1">&#39;firstTag&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="nx">meta</span><span class="p">.</span><span class="nx">tags</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="nx">metalsmith</span><span class="p">()</span>
-<span class="p">...</span>
-<span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">files</span><span class="p">,</span> <span class="nx">metalsmith</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">each</span><span class="p">(</span><span class="nx">multimatch</span><span class="p">(</span><span class="nx">keys</span><span class="p">(</span><span class="nx">files</span><span class="p">),</span> <span class="s1">&#39;articles/**.*&#39;</span><span class="p">),</span> <span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">files</span><span class="p">[</span><span class="nx">src</span><span class="p">].</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">interpolate</span><span class="p">(</span><span class="s1">&#39;{title} ({firstTag})&#39;</span><span class="p">,</span> <span class="nx">src</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span>
-  <span class="p">})</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">build</span><span class="p">()</span>
-</code></pre></div>
-
-
-
+metalsmith()
+...
+.use(<span class="hljs-function">(<span class="hljs-params">files, metalsmith, done</span>) =&gt;</span> {
+  each(multimatch(keys(files), <span class="hljs-string">'articles/**.*'</span>), (src) =&gt; {
+    files[src].title = interpolate(<span class="hljs-string">'{title} ({firstTag})'</span>, src, files)
+  })
+})
+.build()
+</code></pre>
 <p>The <code>meta</code> argument passed to resolvers contains meta from metalsmith files
 structure, plus <code>path</code> property, plus any additional properties you passed in.</p>
-
 <p>The first resolver in the array which returns either a truthy value <em>or</em> an 0
 length string will be substituted for a given token.</p>
-
-
-<div class="pilwrap" id="slugify%20on%20the%20fly">
+<div class="pilwrap" id="slugify-on-the-fly">
   <h2>
-    <a href="#slugify%20on%20the%20fly" name="slugify%20on%20the%20fly" class="pilcrow">&#182;</a>
-    slugify on the fly
+    <a href="#slugify-on-the-fly" name="slugify-on-the-fly" class="pilcrow"></a>
+slugify on the fly
   </h2>
 </div>
-
-
 <p>prefix a token with <code>-</code> or <code>_</code> like <code>{-title}</code> to slugify the token's value.</p>
-
-
 <div class="pilwrap" id="compatibility">
   <h2>
-    <a href="#compatibility" name="compatibility" class="pilcrow">&#182;</a>
-    compatibility
+    <a href="#compatibility" name="compatibility" class="pilcrow"></a>
+compatibility
   </h2>
 </div>
-
-
 <p><code>dist/index.js</code> is fully compatible with node 6.3.1</p>
-
 <p><code>dist/node4/index.js</code> is compatible with node 4 LTS, require it like so:
 <code>var mimeType = require('metalsmith-interpolate/dist/node4')</code></p>
-
-
 <div class="pilwrap" id="author">
   <h2>
-    <a href="#author" name="author" class="pilcrow">&#182;</a>
-    Author
+    <a href="#author" name="author" class="pilcrow"></a>
+Author
   </h2>
 </div>
-
-
-<p>Levi Wheatcroft <a href="&#109;&#x61;&#105;&#108;&#x74;&#x6F;:&#108;&#x65;v&#105;&#x40;&#x77;&#x68;&#116;&#x2E;&#99;&#x72;">&#108;&#x65;v&#105;&#x40;&#x77;&#x68;&#116;&#x2E;&#99;&#x72;</a></p>
-
-
+<p>Levi Wheatcroft <a href="mailto:levi@wht.cr.html">levi@wht.cr</a></p>
 <div class="pilwrap" id="contributing">
   <h2>
-    <a href="#contributing" name="contributing" class="pilcrow">&#182;</a>
-    Contributing
+    <a href="#contributing" name="contributing" class="pilcrow"></a>
+Contributing
   </h2>
 </div>
-
-
 <p>Contributions welcome; Please submit all pull requests against the master
 branch.</p>
-
-
 <div class="pilwrap" id="license">
   <h2>
-    <a href="#license" name="license" class="pilcrow">&#182;</a>
-    License
+    <a href="#license" name="license" class="pilcrow"></a>
+License
   </h2>
 </div>
-
-
-<p><a href="http://opensource.org/licenses/MIT">MIT</a></p></div>
+<p><a href="http://opensource.org/licenses/MIT">MIT</a></p>
+</div>
   </div>
 </body>
 </html>
