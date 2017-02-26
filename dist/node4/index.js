@@ -56,7 +56,7 @@ function interpolate(format, src, files) {
       // an 0 length string should return true
       return (0, _lodash.isString)(result) || result;
     });
-    if (!resolved) throw new Error(`bad token: "${ token }" in ${ src }"`);
+    if (!resolved) throw new Error(`bad token: "${token}" in ${src}"`);
     if (slugify) result = (0, _slug2.default)(result, slugify);
     return result;
   });
@@ -80,7 +80,11 @@ let resolvers = [
 // check `path.parse()`` results for token
 (token, meta) => _path2.default.parse(meta.path)[token],
 // check meta properties for token
-(token, meta) => meta[token],
+(token, meta) => {
+  if (!meta[token]) return false;
+  if (typeof meta[token] === 'function') return meta[token](meta);
+  return meta[token];
+},
 // check token against moment formats
 (token, meta) => {
   // ugly negated regex will pass if only listed chars are present
@@ -89,7 +93,7 @@ let resolvers = [
     // I personally use `modifiedDate` and `publishedDate`, maybe it's only me
     // this is probably quite brittle, will see what issues arises
     date = (0, _moment2.default)(meta.modifiedDate || meta.publishedDate || meta.date || meta.stats.ctime);
-    if (!date.isValid()) throw new Error(`no date: ${ meta.path }`);
+    if (!date.isValid()) throw new Error(`no date: ${meta.path}`);
     return date.format(token);
   }
 }];
