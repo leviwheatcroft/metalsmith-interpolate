@@ -77,7 +77,7 @@ let resolvers = [
 (token, meta) => _path2.default.parse(meta.path)[token],
 // check meta properties for token
 (token, meta) => {
-  if (!meta[token]) return false;
+  if (meta[token] === undefined) return false;
   if (typeof meta[token] === 'function') return meta[token](meta);
   return meta[token];
 },
